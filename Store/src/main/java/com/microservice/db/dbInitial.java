@@ -1,4 +1,4 @@
-package com.microservice.initdb;
+package com.microservice.db;
 
 import com.microservice.dao.StoreRepository;
 import com.microservice.entity.Store;

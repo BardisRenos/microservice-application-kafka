@@ -1,26 +1,34 @@
 package com.microservice.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.microservice.dao.OrderRepository;
 import com.microservice.entity.Order;
+import com.microservice.kafkaConfig.Producer;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     
     private final OrderRepository orderRepository;
+    private final Producer producer;
 
 
     public List<Order> findAll() {
-
         return orderRepository.findAll();
     }
 
-    public Order createAccount(Order order) {
+    public String createAccount(Order order) throws JsonProcessingException {
 
-        return orderRepository.save(order);
+        log.info("Sending an event message to Store");
+
+        Order orderRes =  orderRepository.save(order);
+
+        return producer.sendMessage(orderRes);
     }
 }
