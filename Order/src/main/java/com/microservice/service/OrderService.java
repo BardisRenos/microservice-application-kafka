@@ -20,7 +20,6 @@ public class OrderService {
 
 
     public List<Order> findAll() {
-
         return orderRepository.findAll();
     }
 
@@ -28,7 +27,8 @@ public class OrderService {
 
         log.info("Sending an event message to Store");
 
-        return producer.sendMessage(order);
-//        return orderRepository.save(order);
+        Order orderRes =  orderRepository.save(order);
+
+        return producer.sendMessage(orderRes);
     }
 }

@@ -2,6 +2,7 @@ package com.microservice.kafkaConfig;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.admin.NewTopic;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class kafkaConfig {
 
+    @Value("${topic.name}")
+    private String orderTopic;
     private final KafkaProperties kafkaProperties;
 
     @Bean
@@ -32,7 +35,7 @@ public class kafkaConfig {
     @Bean
     public NewTopic topic() {
         return TopicBuilder
-                .name("t.food.order")
+                .name(orderTopic)
                 .partitions(1)
                 .replicas(1)
                 .build();

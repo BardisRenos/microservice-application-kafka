@@ -18,12 +18,12 @@ public class dbInitial {
 
         return args -> {
 
-            List<Order> accounts = new ArrayList<>(Arrays.asList(
+            List<Order> orders = new ArrayList<>(Arrays.asList(
                     new Order(1, "Renos", "Bread", "Butter", 5.0),
                     new Order(2, "Nikos", "Milk", "Cafe" , 3.5),
                     new Order(3, "Andreas", "Chips", "Water", 8.0)));
 
-            orderRepository.saveAll(accounts);
+            orderRepository.saveAll(orders);
 
         };
     }
