@@ -14,13 +14,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class Consumer {
 
-    private static final String orderTopic = "${topic.name}";
+    private static final String ORDER_TOPIC = "${topic.name}";
 
     private final StoreService storeService;
     private final ObjectMapper objectMapper;
 
 
-    @KafkaListener(topics = orderTopic)
+    @KafkaListener(topics = ORDER_TOPIC)
     public void consumeMessageFromOrder(String message) throws JsonProcessingException {
         log.info("The message: "+ message);
 

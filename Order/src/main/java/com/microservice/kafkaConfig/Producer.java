@@ -15,14 +15,14 @@ import org.springframework.stereotype.Component;
 public class Producer {
 
     @Value("${topic.name}")
-    private String orderTopic;
+    private String ORDER_TOPIC;
 
     private final ObjectMapper objectMapper;
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public String sendMessage(Order order) throws JsonProcessingException {
         String orderAsMessage = objectMapper.writeValueAsString(order);
-        kafkaTemplate.send(orderTopic, orderAsMessage);
+        kafkaTemplate.send(ORDER_TOPIC, orderAsMessage);
 
         log.info("The order is produced and sent {}", orderAsMessage);
 
