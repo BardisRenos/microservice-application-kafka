@@ -20,12 +20,6 @@ public class Producer {
     private final ObjectMapper objectMapper;
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-//    @Autowired
-//    public Producer(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper) {
-//        this.kafkaTemplate = kafkaTemplate;
-//        this.objectMapper = objectMapper;
-//    }
-
     public String sendMessage(Order order) throws JsonProcessingException {
         String orderAsMessage = objectMapper.writeValueAsString(order);
         kafkaTemplate.send(orderTopic, orderAsMessage);
